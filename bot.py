@@ -3,26 +3,27 @@
 import os
 
 import asyncio
-import json
-from dotenv import load_dotenv
 import discord
 from discord.ext import commands
 from ytdb.yt_player import YoutubeCommands
+
+# Configuration - Hardcoded environment variables
+DISCORD_TOKEN = "MTQ0MDcxNjk3MDkwMjQyMTY0OA.GXFmrl.b91Z6Bb8tp2ssjp3nypZ4tJHGgmCHcu8DCJm2I"
+ENV = "dev"  # Change to "prod" for production
+COMMAND_PREFIX = ["/"]  # Command prefix(es) as a list
+COOKIES_DATA = None  # Optional: Set to your cookies.txt content as a string if needed
 
 
 def main():
     """Main"""
     print("Starting YTDB...")
 
-    # Get envs
-    print("Loading dotenv")
-    load_dotenv()
-    token = os.getenv("DISCORD_TOKEN")
-
-    env = os.getenv("ENV", "dev")
+    # Use hardcoded config values
+    token = DISCORD_TOKEN
+    env = ENV
     print("environment: {env}".format(env=env))
 
-    command_prefix = json.loads(os.getenv("COMMAND_PREFIX", '["!steve "]'))
+    command_prefix = COMMAND_PREFIX
     print("command_prefix(es): {command_prefix}".format(command_prefix=command_prefix))
 
     # Create Intents for bot
@@ -32,12 +33,12 @@ def main():
     
     # Create cookies file if it doesn't exist
     if not os.path.exists("cookies.txt"):
-        if os.getenv("cookies_data") is None:
-            print("Error: cookies.txt file not found and cookies_data env variable not set. Will try to run anyway...")
+        if COOKIES_DATA is None:
+            print("Error: cookies.txt file not found and COOKIES_DATA not set. Will try to run anyway...")
         else:
             print("Creating cookies.txt file...")
             with open("cookies.txt", "w") as f:
-                f.write(os.getenv("cookies_data"))
+                f.write(COOKIES_DATA)
         
 
     # Create bot
