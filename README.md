@@ -13,7 +13,7 @@ A Discord music bot that plays YouTube audio in voice channels with a UI and int
 
 ## Commands
 
-### Prefix Commands (Default: `!steve `)
+### Prefix Commands
 
 - `play <url> [channel_name]` - Play YouTube audio from a URL
 - `stop` - Stop playback and clear the queue
