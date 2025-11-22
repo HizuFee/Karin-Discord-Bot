@@ -45,7 +45,7 @@ def main():
     main_bot = commands.Bot(
         command_prefix=command_prefix,
         intents=intents,
-        activity=discord.Game("some music!"),
+        activity=discord.Game("huh?"),
     )
 
     @main_bot.event

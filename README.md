@@ -1,14 +1,23 @@
-# ytdb
-Youtube Player Discord Bot
+# - YouTube Discord Bot
 
-## Set Up
-1. Create .env at project's base dir
-2. Add env variables
-3. Installed required pip packages (after creating python env)
-   `pip install -r requirements.txt`
+A Discord music bot that plays YouTube audio in voice channels with a UI and interactive controls.
 
-## Env
-| Environment Variable  | Description  |
-| ----------------------| -------------|
-| DISCORD_TOKEN         | Discord token for bot  |
-| COMMAND_PREFIX        | Prefixes for commands (for slash commands need '/' in here or leave default) in string array '["\", "!"]'  |
+## Features
+
+- Play YouTube audio in Discord voice channels
+- Queue management system
+- UI with rich embeds and thumbnails
+- Interactive buttons for music control (Skip, Stop)
+- Support for both prefix commands and slash commands
+- Automatic voice channel detection or manual channel selection
+
+## Commands
+
+### Prefix Commands (Default: `!steve `)
+
+- `play <url> [channel_name]` - Play YouTube audio from a URL
+- `stop` - Stop playback and clear the queue
+- `skip` - Skip the current track
+- `queue` - Display the current queue
+
+

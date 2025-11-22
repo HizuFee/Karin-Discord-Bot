@@ -75,11 +75,38 @@ async def download(url_or_string: str, tag: str = "unknown") -> str:
 
     # Create file and return information
     filename = ytdl.prepare_filename(data)
+    
+    # Extract thumbnail URL (prefer highest quality available)
+    thumbnail = None
+    if "thumbnail" in data and data["thumbnail"]:
+        thumbnail = data["thumbnail"]
+    elif "thumbnails" in data and data["thumbnails"]:
+        # Get the highest quality thumbnail from the list
+        thumbnails = data["thumbnails"]
+        if thumbnails:
+            # Sort by width/height if available, or take the last one (usually highest quality)
+            thumbnail = thumbnails[-1].get("url") if isinstance(thumbnails[-1], dict) else None
+    
+    # Format duration if available
+    duration_str = None
+    if "duration" in data and data["duration"]:
+        duration_seconds = data["duration"]
+        hours = int(duration_seconds // 3600)
+        minutes = int((duration_seconds % 3600) // 60)
+        seconds = int(duration_seconds % 60)
+        if hours > 0:
+            duration_str = f"{hours}:{minutes:02d}:{seconds:02d}"
+        else:
+            duration_str = f"{minutes}:{seconds:02d}"
+    
     return {
         "id": data["id"],
         "file": filename,
         "title": data["title"],
         "url": data["webpage_url"],
+        "thumbnail": thumbnail,
+        "duration": duration_str,
+        "uploader": data.get("uploader"),
     }
 
 
